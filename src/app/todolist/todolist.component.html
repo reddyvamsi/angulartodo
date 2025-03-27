@@ -4,7 +4,7 @@
           <h1>Add Task In  The List</h1>
           <label for="exampleInputEmail1">Enter the Task</label>
           <input type="text" class="form-control" name="task"   placeholder="Enter task" ngModel required>
-          <small *ngIf="todoform.invalid && todoform.dirty" id="errorMessage" class="form-text text-danger" style="color: red;">plese Entert the task</small>
+          <small *ngIf="todoform.invalid && todoform.touched" id="errorMessage" class="form-text text-danger" style="color: red;">plese Entert the task</small>
         </div>
         <button [disabled]="todoform.invalid"  style="margin-top:1.5rem;" type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let t of taskArray; index as i">
-            <td><input type="text" #taskinput class="form-control" value="{{t.taskname}}" [readOnly]="!t.isEdit"></td>
+            <td><input type="text" [ngClass]="{'edit':t.isEdit, 'non-edit':!t.isEdit, 'crosed':t.iscomplted}" #taskinput class="form-control" value="{{t.taskname}}" [readOnly]="!t.isEdit"></td>
             <td><input type="checkbox" (change)="onChange(i)"></td>
             <td><button type="button" class="btn btn-danger"  (click)="deleteMethod(i)">Detete</button></td>
             <td><button type="button" class="btn btn-secondary" (click)="editmethod(i)" [disabled]="t.isEdit" >Edit</button></td>
